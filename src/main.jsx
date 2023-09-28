@@ -11,6 +11,7 @@ import Products from "./pages/Products";
 import Categories from "./pages/Category";
 import Customers from "./pages/Customers";
 import Companies from "./pages/Companies";
+import Invoice from "./pages/Invoice";
 
 
 const router = createBrowserRouter([
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
         {
           path: "/company",
           element: <Companies/>,
+        },
+        {
+          path: "/invoice",
+          element: <Invoice/>,
         },
       ],
     },

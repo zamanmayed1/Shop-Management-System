@@ -1,12 +1,9 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
 
 const Header = () => {
   const currentDate = new Date();
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   const formattedDate = currentDate.toLocaleDateString('en-US', options);
-  const location = useLocation();
-  const { pathname } = location;
 
   return (
     <header className="bg-white py-2 px-4 md:px-8 shadow-sm rounded-md">

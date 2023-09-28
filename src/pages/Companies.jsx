@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
+import CompanyCard from "../components/cards/CompanyCard";
 
 const Companies = () => {
   const companiesData = [
@@ -104,32 +105,7 @@ const Companies = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
         {filteredCompanies.map((company) => (
-          <div
-            key={company.id}
-            className="bg-white cursor-pointer p-4 border flex flex-col justify-between transition duration-200 transform hover:scale-105 hover:shadow-xl"
-          >
-            <h2 className="text-lg font-semibold mb-2">{company.name}</h2>
-            <p className="text-gray-700">ID: {company.id}</p>
-            <p className="text-gray-700">Phone: {company.phone}</p>
-            <p className="text-gray-700">Salesperson: {company.salesperson}</p>
-
-            <div className="mt-4 flex items-center space-x-4 border-t pt-2">
-              <button className="flex items-center text-blue-600 hover:text-blue-800">
-                <FaEye className="mr-1" /> View
-              </button>
-              <button className="flex items-center text-green-600 hover:text-green-800">
-                <FaEdit className="mr-1" /> Edit
-              </button>
-              <button className="flex items-center text-red-600 hover:text-red-800">
-                <FaTrash className="mr-1" /> Delete
-              </button>
-            </div>
-            <img
-              className="opacity-10 w-12 absolute right-0 bottom-0"
-              src="https://img.icons8.com/?size=256&id=53373&format=png"
-              alt=""
-            />
-          </div>
+         <CompanyCard key={company.id} company={company}/>
         ))}
       </div>
     </div>

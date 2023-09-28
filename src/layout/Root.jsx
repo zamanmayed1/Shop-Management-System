@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { RiHome2Fill, RiProfileFill, RiFolderFill, RiUserFill, RiBuilding2Fill } from 'react-icons/ri'; // Import icons
+import { RiHome2Fill, RiProfileFill, RiFolderFill, RiUserFill, RiBuilding2Fill,RiInbox2Fill } from 'react-icons/ri'; // Import icons
 import Header from './Header';
 
 const Root = () => {
@@ -27,6 +27,9 @@ const Root = () => {
           <NavLink to="/company" currentPath={pathname}>
             <RiBuilding2Fill /> Company
           </NavLink>
+          <NavLink to="/invoice" currentPath={pathname}>
+            <RiInbox2Fill /> Invoice
+          </NavLink>
         </div>
         <div id='noscrollbar' className="col-span-4 bg-white m-3 shadow-md rounded-md p-2 overflow-y-scroll h-full">
           <Outlet />
@@ -40,15 +43,18 @@ const NavLink = ({ to, currentPath, children }) => {
   const isActive = to === currentPath;
 
   return (
-    <Link
+    <div className='relative  '>
+      <Link
       to={to}
-      className={`flex duration-300 ease-linear items-center gap-4 py-3 mb-2 text-lg px-2 rounded-md ${
+      className={`flex duration-300 ease-linear items-center gap-4 py-3  mb-2 text-lg px-2 rounded-md ${
         isActive ? 'bg-blue-500 text-white' : 'bg-gray-50 hover:bg-blue-50'
       }`}
     >
       <span className='flex justify-center md:justify-start w-full md:w-[18px]'> {children[0]}</span>
       <span className='hidden md:block'> {children[1]}</span>
     </Link>
+    
+    </div>
   );
 };
 
