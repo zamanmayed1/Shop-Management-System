@@ -12,6 +12,12 @@ import Categories from "./pages/Category";
 import Customers from "./pages/Customers";
 import Companies from "./pages/Companies";
 import Invoice from "./pages/Invoice";
+import Settings from "./pages/Settings";
+import AddProduct from "./pages/addItems/AddProduct";
+import AddCategory from "./pages/addItems/AddCategory";
+import AddCustomer from "./pages/addItems/AddCustomer";
+import AddCompany from "./pages/addItems/AddCompany";
+import Home from "./pages/Home/Home";
 
 
 const router = createBrowserRouter([
@@ -22,27 +28,47 @@ const router = createBrowserRouter([
       children: [
         {
           path: "/",
-          element: <h1>Home Page</h1>,
+          element: <Home/>,
         },
         {
           path: "/products",
           element: <Products/>,
         },
         {
+          path: "/products/add",
+          element: <AddProduct/>,
+        },
+        {
           path: "/category",
           element: <Categories/>,
+        },
+        {
+          path: "/category/add",
+          element: <AddCategory/>,
         },
         {
           path: "/customers",
           element: <Customers/>,
         },
         {
+          path: "/customers/add",
+          element: <AddCustomer/>,
+        },
+        {
           path: "/company",
           element: <Companies/>,
         },
         {
+          path: "/company/add",
+          element: <AddCompany/>,
+        },
+        {
           path: "/invoice",
           element: <Invoice/>,
+        },
+        {
+          path: "/settings",
+          element: <Settings/>,
         },
       ],
     },

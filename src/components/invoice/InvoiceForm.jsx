@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { uid } from "uid";
 import InvoiceItem from "./InvoiceItem";
 import InvoiceModal from "./InvoiceModal";
-import incrementString from "../../helpers/incrementString";
 
 const date = new Date();
 const today = date.toLocaleDateString("en-GB", {
@@ -12,12 +11,13 @@ const today = date.toLocaleDateString("en-GB", {
 });
 
 const InvoiceForm = () => {
+  const [allinvoices, setInvoices] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [discount, setDiscount] = useState("");
   const [tax, setTax] = useState("");
-  const [invoiceNumber, setInvoiceNumber] = useState(1);
   const [cashierName, setCashierName] = useState("");
   const [customerName, setCustomerName] = useState("");
+  const [invoiceNumber, setInvoiceNumber] = useState(1);
   const [items, setItems] = useState([
     {
       id: uid(6),
@@ -27,13 +27,36 @@ const InvoiceForm = () => {
     },
   ]);
 
+  const logInvoiceData = () => {
+    // Create an array of invoice items excluding empty items
+    const formattedItems = items.filter((item) => item.name.trim().length > 0);
+
+    // Create an invoice object with a unique invoice number
+    const invoice = {
+      invoiceNumber: uid(6), // Generate a unique invoice number using uid
+      cashierName,
+      customerName,
+      items: formattedItems,
+      subtotal: subtotal.toFixed(2),
+      taxRate: taxRate.toFixed(2),
+      discountRate: discountRate.toFixed(2),
+      total: total % 1 === 0 ? total : total.toFixed(2),
+    };
+
+    // Add the invoice to the state and update local storage
+    setInvoices([...allinvoices, invoice]);
+    localStorage.setItem("invoices", JSON.stringify([...allinvoices, invoice]));
+  };
+
   const reviewInvoiceHandler = (event) => {
     event.preventDefault();
     setIsOpen(true);
+    logInvoiceData(); // Log the invoice data when reviewing the invoice
   };
 
+
   const addNextInvoiceHandler = () => {
-    setInvoiceNumber((prevNumber) => incrementString(prevNumber));
+    setInvoiceNumber((prevNumber) => prevNumber + 1); // Increment the invoice number
     setItems([
       {
         id: uid(6),
@@ -43,7 +66,7 @@ const InvoiceForm = () => {
       },
     ]);
   };
-
+  
   const addItemHandler = () => {
     const id = uid(6);
     setItems((prevItem) => [

@@ -1,95 +1,13 @@
 import React, {  useState } from "react";
 import ProductCard from "../components/cards/ProductCard";
+import { productsData } from "../signals/productSignals";
 
 const Products = () => {
-  const productsData = [
-    {
-      id: 1,
-      name: "Premium Leather Backpack",
-      buyPrice: 79.99,
-      salePrice: 99.99,
-      stock: 50,
-      category: "Bags",
-    },
-    {
-      id: 2,
-      name: "Wireless Noise-Canceling Headphones",
-      buyPrice: 149.99,
-      salePrice: 199.99,
-      stock: 30,
-      category: "Electronics",
-    },
-    {
-      id: 3,
-      name: "Organic Cotton T-Shirt",
-      buyPrice: 19.99,
-      salePrice: 29.99,
-      stock: 60,
-      category: "Clothing",
-    },
-    {
-      id: 4,
-      name: "Smartphone Stand and Charger",
-      buyPrice: 24.99,
-      salePrice: 34.99,
-      stock: 45,
-      category: "Accessories",
-    },
-    {
-      id: 5,
-      name: "Professional DSLR Camera",
-      buyPrice: 799.99,
-      salePrice: 999.99,
-      stock: 15,
-      category: "Electronics",
-    },
-    {
-      id: 6,
-      name: "Gourmet Coffee Beans (1 lb)",
-      buyPrice: 9.99,
-      salePrice: 14.99,
-      stock: 75,
-      category: "Food & Beverages",
-    },
-    {
-      id: 7,
-      name: "Laptop Backpack with USB Charging Port",
-      buyPrice: 49.99,
-      salePrice: 59.99,
-      stock: 40,
-      category: "Bags",
-    },
-    {
-      id: 8,
-      name: "Classic Men's Leather Shoes",
-      buyPrice: 69.99,
-      salePrice: 89.99,
-      stock: 20,
-      category: "Footwear",
-    },
-    {
-      id: 9,
-      name: "Stainless Steel Water Bottle (20 oz)",
-      buyPrice: 14.99,
-      salePrice: 19.99,
-      stock: 55,
-      category: "Accessories",
-    },
-    {
-      id: 10,
-      name: "Designer Sunglasses",
-      buyPrice: 79.99,
-      salePrice: 119.99,
-      stock: 10,
-      category: "Accessories",
-    },
-  ];
-
-
+  
 
   // Step 1: Initialize state variables
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState(productsData);
+  const [filteredProducts, setFilteredProducts] = useState(productsData.value);
 
   // Step 2: Create a function to update the search query state
   const handleSearchChange = (e) => {
@@ -97,7 +15,7 @@ const Products = () => {
     setSearchQuery(query);
 
     // Step 3: Use the filter method to filter products
-    const filtered = productsData.filter((product) =>
+    const filtered = productsData.value.filter((product) =>
       product.name.toLowerCase().includes(query)
     );
     setFilteredProducts(filtered);
@@ -125,7 +43,9 @@ const Products = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
         {filteredProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          // console.log(product),
+          <ProductCard key={product.slug}   product={product} />
+          // <h1 key={product.slug}>{product.name}</h1>
         ))}
       </div>
     </div>

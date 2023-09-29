@@ -4,7 +4,7 @@ import productimg from "../../assets/product.png"
 const ProductCard = ({product}) => {
   return (
     <div
-      key={product.id}
+
       className="bg-white cursor-pointer p-4 border flex flex-col justify-between transition duration-200 transform hover:scale-105 hover:shadow-xl"
     >
       <h2 className="text-lg font-semibold mb-2">{product.name}</h2>
