@@ -1,85 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 import CompanyCard from "../components/cards/CompanyCard";
+import axios from "axios"; // Import Axios for data fetching
+import Spinner from "../components/Spinner";
 
 const Companies = () => {
-  const companiesData = [
-    {
-      companyName: "ABC Inc.",
-      phone: "123-456-7890",
-      productList: ["Oil", "Mata", "lembu"],
-      note: "<p>ABC Inc. note</p>",
-    },
-    {
-      companyName: "XYZ Corp.",
-      phone: "987-654-3210",
-      productList: [],
-      note: "<p>XYZ Corp. note</p>",
-    },
-    {
-      companyName: "Tech Solutions Ltd.",
-      phone: "555-123-4567",
-      productList: [],
-      note: "<p>Tech Solutions Ltd. note</p>",
-    },
-    {
-      companyName: "Global Widgets Inc.",
-      phone: "555-987-6543",
-      productList: [],
-      note: "<p>Global Widgets Inc. note</p>",
-    },
-    {
-      companyName: "Acme Innovations",
-      phone: "888-555-1234",
-      productList: [],
-      note: "<p>Acme Innovations note</p>",
-    },
-    {
-      companyName: "EcoTech Industries",
-      phone: "777-333-2222",
-      productList: [],
-      note: "<p>EcoTech Industries note</p>",
-    },
-    {
-      companyName: "Data Solutions LLC",
-      phone: "555-888-9999",
-      productList: [],
-      note: "<p>Data Solutions LLC note</p>",
-    },
-    {
-      companyName: "Infinite Innovations",
-      phone: "444-666-7777",
-      productList: [],
-      note: "<p>Infinite Innovations note</p>",
-    },
-    {
-      companyName: "Sunshine Enterprises",
-      phone: "333-222-1111",
-      productList: [],
-      note: "<p>Sunshine Enterprises note</p>",
-    },
-    {
-      companyName: "Swift Systems Inc.",
-      phone: "222-444-5555",
-      productList: [],
-      note: "<p>Swift Systems Inc. note</p>",
-    },
-  ];
-
-  // Step 1: Initialize state variables
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredCompanies, setFilteredCompanies] = useState(companiesData);
+  const [companiesData, setCompaniesData] = useState([]);
+  const [filteredCompanies, setFilteredCompanies] = useState([]);
+  const [loading, setLoading] = useState(true); // Add a loading state
 
-  // Step 2: Create a function to update the search query state
-  const handleSearchChange = (e) => {
-    const query = e.target.value.toLowerCase();
-    setSearchQuery(query);
+  useEffect(() => {
+    // Step 1: Fetch data using Axios when the component mounts
+    axios
+      .get("https://api.npoint.io/34806c66b4cb7087d92b")
+      .then(function (response) {
+        setCompaniesData(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .finally(function () {
+        setLoading(false); // Set loading to false when data is fetched
+      });
+  }, []);
 
-    // Step 3: Use the filter method to filter companies
+  useEffect(() => {
+    // Step 2: Use the filter method to filter companies when companiesData or searchQuery changes
+    const query = searchQuery.toLowerCase();
     const filtered = companiesData.filter((company) =>
-      company.name.toLowerCase().includes(query)
+      company.companyName.toLowerCase().includes(query)
     );
     setFilteredCompanies(filtered);
+  }, [companiesData, searchQuery]);
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e?.target?.value.toLowerCase());
   };
 
   return (
@@ -90,7 +46,6 @@ const Companies = () => {
           <p className="text-gray-600">
             Total Companies: {filteredCompanies.length}
           </p>
-          {/* Step 4: Use the searchQuery state */}
           <input
             type="text"
             placeholder="Search Companies"
@@ -101,11 +56,15 @@ const Companies = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-        {filteredCompanies.map((company) => (
-          <CompanyCard key={company.phone} company={company} />
-        ))}
-      </div>
+      {loading ? ( // Step 3: Render the spinner when loading is true
+        <Spinner />
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
+          {filteredCompanies.map((company) => (
+            <CompanyCard key={company.phone} company={company} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

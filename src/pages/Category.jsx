@@ -1,124 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CategoryCard from '../components/cards/CategoryCard';
+import axios from 'axios';
+import Spinner from '../components/Spinner';
 
 const Categories = () => {
-  const categoriesData = [
-    {
-      "name": "Electronics",
-      "slug": "electronics",
-      "totalProduct": "10",
-      "totalPrice": "149",
-      "note": "<p>All&nbsp; Electronics <strong>products</strong></p>"
-    },
-    {
-      "name": "Clothing",
-      "slug": "clothing",
-      "totalProduct": "20",
-      "totalPrice": "299",
-      "note": "<p>All&nbsp; Clothing <strong>products</strong></p>"
-    },
-    {
-      "name": "Furniture",
-      "slug": "furniture",
-      "totalProduct": "15",
-      "totalPrice": "499",
-      "note": "<p>All&nbsp; Furniture <strong>products</strong></p>"
-    },
-    {
-      "name": "Books",
-      "slug": "books",
-      "totalProduct": "30",
-      "totalPrice": "199",
-      "note": "<p>All&nbsp; Books <strong>products</strong></p>"
-    },
-    {
-      "name": "Toys",
-      "slug": "toys",
-      "totalProduct": "25",
-      "totalPrice": "99",
-      "note": "<p>All&nbsp; Toys <strong>products</strong></p>"
-    },
-    {
-      "name": "Sports Equipment",
-      "slug": "sports-equipment",
-      "totalProduct": "18",
-      "totalPrice": "349",
-      "note": "<p>All&nbsp; Sports Equipment <strong>products</strong></p>"
-    },
-    {
-      "name": "Home Decor",
-      "slug": "home-decor",
-      "totalProduct": "22",
-      "totalPrice": "199",
-      "note": "<p>All&nbsp; Home Decor <strong>products</strong></p>"
-    },
-    {
-      "name": "Beauty Products",
-      "slug": "beauty-products",
-      "totalProduct": "12",
-      "totalPrice": "129",
-      "note": "<p>All&nbsp; Beauty Products <strong>products</strong></p>"
-    },
-    {
-      "name": "Kitchen Appliances",
-      "slug": "kitchen-appliances",
-      "totalProduct": "15",
-      "totalPrice": "249",
-      "note": "<p>All&nbsp; Kitchen Appliances <strong>products</strong></p>"
-    },
-    {
-      "name": "Garden Supplies",
-      "slug": "garden-supplies",
-      "totalProduct": "14",
-      "totalPrice": "199",
-      "note": "<p>All&nbsp; Garden Supplies <strong>products</strong></p>"
-    },
-    {
-      "name": "Jewelry",
-      "slug": "jewelry",
-      "totalProduct": "8",
-      "totalPrice": "399",
-      "note": "<p>All&nbsp; Jewelry <strong>products</strong></p>"
-    },
-    {
-      "name": "Pet Supplies",
-      "slug": "pet-supplies",
-      "totalProduct": "20",
-      "totalPrice": "99",
-      "note": "<p>All&nbsp; Pet Supplies <strong>products</strong></p>"
-    },
-    {
-      "name": "Fitness Equipment",
-      "slug": "fitness-equipment",
-      "totalProduct": "12",
-      "totalPrice": "299",
-      "note": "<p>All&nbsp; Fitness Equipment <strong>products</strong></p>"
-    },
-    {
-      "name": "Office Supplies",
-      "slug": "office-supplies",
-      "totalProduct": "15",
-      "totalPrice": "149",
-      "note": "<p>All&nbsp; Office Supplies <strong>products</strong></p>"
-    },
-    
-  ];
-  // Step 1: Initialize state variables
+  const [categoriesData, setCategoriesData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filteredCategories, setFilteredCategories] = useState(categoriesData);
+  const [filteredCategories, setFilteredCategories] = useState([]);
+  const [loading, setLoading] = useState(true); // Add a loading state
 
+  useEffect(() => {
+    axios
+      .get("https://api.npoint.io/6a1401b2360dc393c8df")
+      .then(function (response) {
+        setCategoriesData(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .finally(function () {
+        setLoading(false); // Set loading to false when data is fetched
+      });
+  }, []);
 
-
-  // Step 2: Create a function to update the search query state
-  const handleSearchChange = (e) => {
-    const query = e.target.value.toLowerCase();
-    setSearchQuery(query);
-
-    // Step 3: Use the filter method to filter categories
+  useEffect(() => {
+    // Use the filter method to filter categories when categoriesData changes
     const filtered = categoriesData.filter((category) =>
-      category.name.toLowerCase().includes(query)
+      category.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredCategories(filtered);
+  }, [categoriesData, searchQuery]);
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value.toLowerCase());
   };
 
   return (
@@ -140,11 +54,15 @@ const Categories = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-        {filteredCategories.map((category) => (
-         <CategoryCard key={category.slug} category={category}/>
-        ))}
-      </div>
+      {loading ? ( // Render the spinner when loading is true
+        <Spinner />
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
+          {filteredCategories.map((category) => (
+            <CategoryCard key={category.slug} category={category} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

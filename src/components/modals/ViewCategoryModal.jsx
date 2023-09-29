@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
 const ViewCategoryModal = ({ isOpen, setIsOpen, category }) => {
-  console.log(category);
   function closeModal() {
     setIsOpen(false);
   }

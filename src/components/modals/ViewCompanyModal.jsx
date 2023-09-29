@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
 const ViewCompanyModal = ({ isOpen, setIsOpen, company }) => {
-  console.log(company);
   function closeModal() {
     setIsOpen(false);
   }

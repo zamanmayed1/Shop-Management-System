@@ -1,26 +1,40 @@
-import React, {  useState } from "react";
+import React, { useState, useEffect } from "react";
 import ProductCard from "../components/cards/ProductCard";
-import { productsData } from "../signals/productSignals";
+import axios from "axios";
+import Spinner from "../components/Spinner";
 
 const Products = () => {
-  
-
-  // Step 1: Initialize state variables
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState(productsData.value);
+  const [productsData, setProductsData] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [loading, setLoading] = useState(true); // Add a loading state
 
-  // Step 2: Create a function to update the search query state
-  const handleSearchChange = (e) => {
-    const query = e.target.value.toLowerCase();
-    setSearchQuery(query);
+  useEffect(() => {
+    axios
+      .get("https://api.npoint.io/8ee79be4963f272aa04d")
+      .then(function (response) {
+        setProductsData(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .finally(function () {
+        setLoading(false); // Set loading to false when data is fetched
+      });
+  }, []);
 
-    // Step 3: Use the filter method to filter products
-    const filtered = productsData.value.filter((product) =>
-      product.name.toLowerCase().includes(query)
+  useEffect(() => {
+    // Filter products based on searchQuery
+    const filtered = productsData.filter((product) =>
+      product.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
+    // Update the filtered products
     setFilteredProducts(filtered);
+  }, [searchQuery, productsData]);
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
   };
-  
 
   return (
     <div className="container mx-auto p-4">
@@ -30,7 +44,6 @@ const Products = () => {
           <p className="text-gray-600">
             Total Products: {filteredProducts.length}
           </p>
-          {/* Step 4: Use the searchQuery state */}
           <input
             type="text"
             placeholder="Search Products"
@@ -41,13 +54,15 @@ const Products = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-        {filteredProducts.map((product) => (
-          // console.log(product),
-          <ProductCard key={product.slug}   product={product} />
-          // <h1 key={product.slug}>{product.name}</h1>
-        ))}
-      </div>
+      {loading ? ( // Render the spinner when loading is true
+        <Spinner />
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
+          {filteredProducts.map((product) => (
+            <ProductCard key={product.slug} product={product} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

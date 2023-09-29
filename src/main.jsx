@@ -18,6 +18,10 @@ import AddCategory from "./pages/addItems/AddCategory";
 import AddCustomer from "./pages/addItems/AddCustomer";
 import AddCompany from "./pages/addItems/AddCompany";
 import Home from "./pages/Home/Home";
+import EditProduct from "./pages/editeItems/EditProduct";
+import EditCategory from "./pages/editeItems/EditCategory";
+import EditCustomer from "./pages/editeItems/EditCustomer";
+import EditCompany from "./pages/editeItems/EditCompany";
 
 
 const router = createBrowserRouter([
@@ -39,12 +43,20 @@ const router = createBrowserRouter([
           element: <AddProduct/>,
         },
         {
+          path: "/products/edit/:id",
+          element: <EditProduct/>,
+        },
+        {
           path: "/category",
           element: <Categories/>,
         },
         {
           path: "/category/add",
           element: <AddCategory/>,
+        },
+        {
+          path: "/category/edit/:id",
+          element: <EditCategory/>,
         },
         {
           path: "/customers",
@@ -55,12 +67,20 @@ const router = createBrowserRouter([
           element: <AddCustomer/>,
         },
         {
+          path: "/customers/edit/:id",
+          element: <EditCustomer/>,
+        },
+        {
           path: "/company",
           element: <Companies/>,
         },
         {
           path: "/company/add",
           element: <AddCompany/>,
+        },
+        {
+          path: "/company/edit/:id",
+          element: <EditCompany/>,
         },
         {
           path: "/invoice",
