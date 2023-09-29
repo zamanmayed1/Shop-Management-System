@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { RiSettings3Fill, RiHome2Fill, RiProfileFill, RiFolderFill, RiUserFill, RiBuilding2Fill, RiInbox2Fill } from 'react-icons/ri'; // Import icons
 import Header from './Header';
@@ -6,7 +6,9 @@ import Header from './Header';
 const Root = () => {
   const location = useLocation();
   let { pathname } = location;
-
+  useEffect(()=>{
+       window.scrollTo(0,0)
+  },[pathname])
   return (
     <div className="bg-gray-100 min-h-screen p-2">
       <Header />

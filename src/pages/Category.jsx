@@ -4,171 +4,104 @@ import CategoryCard from '../components/cards/CategoryCard';
 const Categories = () => {
   const categoriesData = [
     {
-      id: 1,
-      name: 'Electronics',
-      totalProducts: 10,
-      products: [
-        {
-          id: 101,
-          name: 'Laptop',
-          price: 800,
-        },
-        {
-          id: 102,
-          name: 'Smartphone',
-          price: 400,
-        },
-      ],
+      "name": "Electronics",
+      "slug": "electronics",
+      "totalProduct": "10",
+      "totalPrice": "149",
+      "note": "<p>All&nbsp; Electronics <strong>products</strong></p>"
     },
     {
-      id: 2,
-      name: 'Clothing',
-      totalProducts: 2,
-      products: [
-        {
-          id: 201,
-          name: 'T-Shirt',
-          price: 20,
-        },
-      ],
+      "name": "Clothing",
+      "slug": "clothing",
+      "totalProduct": "20",
+      "totalPrice": "299",
+      "note": "<p>All&nbsp; Clothing <strong>products</strong></p>"
     },
     {
-      id: 3,
-      name: 'Accessories',
-      totalProducts: 5,
-      products: [
-        {
-          id: 301,
-          name: 'Watch',
-          price: 100,
-        },
-        {
-          id: 302,
-          name: 'Headphones',
-          price: 50,
-        },
-        {
-          id: 303,
-          name: 'Sunglasses',
-          price: 30,
-        },
-      ],
+      "name": "Furniture",
+      "slug": "furniture",
+      "totalProduct": "15",
+      "totalPrice": "499",
+      "note": "<p>All&nbsp; Furniture <strong>products</strong></p>"
     },
     {
-      id: 4,
-      name: 'Furniture',
-      totalProducts: 3,
-      products: [
-        {
-          id: 401,
-          name: 'Sofa',
-          price: 500,
-        },
-        {
-          id: 402,
-          name: 'Table',
-          price: 150,
-        },
-      ],
+      "name": "Books",
+      "slug": "books",
+      "totalProduct": "30",
+      "totalPrice": "199",
+      "note": "<p>All&nbsp; Books <strong>products</strong></p>"
     },
     {
-      id: 5,
-      name: 'Books',
-      totalProducts: 4,
-      products: [
-        {
-          id: 501,
-          name: 'Novel',
-          price: 10,
-        },
-        {
-          id: 502,
-          name: 'Textbook',
-          price: 30,
-        },
-        {
-          id: 503,
-          name: 'Mystery',
-          price: 15,
-        },
-      ],
+      "name": "Toys",
+      "slug": "toys",
+      "totalProduct": "25",
+      "totalPrice": "99",
+      "note": "<p>All&nbsp; Toys <strong>products</strong></p>"
     },
     {
-      id: 6,
-      name: 'Home Appliances',
-      totalProducts: 6,
-      products: [
-        {
-          id: 601,
-          name: 'Refrigerator',
-          price: 600,
-        },
-        {
-          id: 602,
-          name: 'Washing Machine',
-          price: 400,
-        },
-      ],
+      "name": "Sports Equipment",
+      "slug": "sports-equipment",
+      "totalProduct": "18",
+      "totalPrice": "349",
+      "note": "<p>All&nbsp; Sports Equipment <strong>products</strong></p>"
     },
     {
-      id: 7,
-      name: 'Toys',
-      totalProducts: 8,
-      products: [
-        {
-          id: 701,
-          name: 'Action Figure',
-          price: 15,
-        },
-        {
-          id: 702,
-          name: 'Doll',
-          price: 10,
-        },
-      ],
+      "name": "Home Decor",
+      "slug": "home-decor",
+      "totalProduct": "22",
+      "totalPrice": "199",
+      "note": "<p>All&nbsp; Home Decor <strong>products</strong></p>"
     },
     {
-      id: 8,
-      name: 'Sports Equipment',
-      totalProducts: 3,
-      products: [
-        {
-          id: 801,
-          name: 'Basketball',
-          price: 25,
-        },
-      ],
+      "name": "Beauty Products",
+      "slug": "beauty-products",
+      "totalProduct": "12",
+      "totalPrice": "129",
+      "note": "<p>All&nbsp; Beauty Products <strong>products</strong></p>"
     },
     {
-      id: 9,
-      name: 'Beauty',
-      totalProducts: 7,
-      products: [
-        {
-          id: 901,
-          name: 'Lipstick',
-          price: 8,
-        },
-      ],
+      "name": "Kitchen Appliances",
+      "slug": "kitchen-appliances",
+      "totalProduct": "15",
+      "totalPrice": "249",
+      "note": "<p>All&nbsp; Kitchen Appliances <strong>products</strong></p>"
     },
     {
-      id: 10,
-      name: 'Automotive',
-      totalProducts: 4,
-      products: [
-        {
-          id: 1001,
-          name: 'Car Wax',
-          price: 12,
-        },
-        {
-          id: 1002,
-          name: 'Oil Filter',
-          price: 5,
-        },
-      ],
+      "name": "Garden Supplies",
+      "slug": "garden-supplies",
+      "totalProduct": "14",
+      "totalPrice": "199",
+      "note": "<p>All&nbsp; Garden Supplies <strong>products</strong></p>"
     },
-    // Add more categories as needed...
+    {
+      "name": "Jewelry",
+      "slug": "jewelry",
+      "totalProduct": "8",
+      "totalPrice": "399",
+      "note": "<p>All&nbsp; Jewelry <strong>products</strong></p>"
+    },
+    {
+      "name": "Pet Supplies",
+      "slug": "pet-supplies",
+      "totalProduct": "20",
+      "totalPrice": "99",
+      "note": "<p>All&nbsp; Pet Supplies <strong>products</strong></p>"
+    },
+    {
+      "name": "Fitness Equipment",
+      "slug": "fitness-equipment",
+      "totalProduct": "12",
+      "totalPrice": "299",
+      "note": "<p>All&nbsp; Fitness Equipment <strong>products</strong></p>"
+    },
+    {
+      "name": "Office Supplies",
+      "slug": "office-supplies",
+      "totalProduct": "15",
+      "totalPrice": "149",
+      "note": "<p>All&nbsp; Office Supplies <strong>products</strong></p>"
+    },
+    
   ];
   // Step 1: Initialize state variables
   const [searchQuery, setSearchQuery] = useState('');
@@ -209,7 +142,7 @@ const Categories = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
         {filteredCategories.map((category) => (
-         <CategoryCard key={category.id} category={category}/>
+         <CategoryCard key={category.slug} category={category}/>
         ))}
       </div>
     </div>

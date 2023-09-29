@@ -5,68 +5,66 @@ import CompanyCard from "../components/cards/CompanyCard";
 const Companies = () => {
   const companiesData = [
     {
-      id: 1,
-      name: "ABC Inc.",
+      companyName: "ABC Inc.",
       phone: "123-456-7890",
-      salesperson: "John Smith",
+      productList: ["Oil", "Mata", "lembu"],
+      note: "<p>ABC Inc. note</p>",
     },
     {
-      id: 2,
-      name: "XYZ Corp.",
+      companyName: "XYZ Corp.",
       phone: "987-654-3210",
-      salesperson: "Jane Doe",
+      productList: [],
+      note: "<p>XYZ Corp. note</p>",
     },
     {
-      id: 3,
-      name: "Tech Solutions Ltd.",
+      companyName: "Tech Solutions Ltd.",
       phone: "555-123-4567",
-      salesperson: "Robert Johnson",
+      productList: [],
+      note: "<p>Tech Solutions Ltd. note</p>",
     },
     {
-      id: 4,
-      name: "Global Widgets Inc.",
+      companyName: "Global Widgets Inc.",
       phone: "555-987-6543",
-      salesperson: "Alice Brown",
+      productList: [],
+      note: "<p>Global Widgets Inc. note</p>",
     },
     {
-      id: 5,
-      name: "Acme Innovations",
+      companyName: "Acme Innovations",
       phone: "888-555-1234",
-      salesperson: "David Wilson",
+      productList: [],
+      note: "<p>Acme Innovations note</p>",
     },
     {
-      id: 6,
-      name: "EcoTech Industries",
+      companyName: "EcoTech Industries",
       phone: "777-333-2222",
-      salesperson: "Ella Martinez",
+      productList: [],
+      note: "<p>EcoTech Industries note</p>",
     },
     {
-      id: 7,
-      name: "Data Solutions LLC",
+      companyName: "Data Solutions LLC",
       phone: "555-888-9999",
-      salesperson: "William Taylor",
+      productList: [],
+      note: "<p>Data Solutions LLC note</p>",
     },
     {
-      id: 8,
-      name: "Infinite Innovations",
+      companyName: "Infinite Innovations",
       phone: "444-666-7777",
-      salesperson: "Grace Harris",
+      productList: [],
+      note: "<p>Infinite Innovations note</p>",
     },
     {
-      id: 9,
-      name: "Sunshine Enterprises",
+      companyName: "Sunshine Enterprises",
       phone: "333-222-1111",
-      salesperson: "James Anderson",
+      productList: [],
+      note: "<p>Sunshine Enterprises note</p>",
     },
     {
-      id: 10,
-      name: "Swift Systems Inc.",
+      companyName: "Swift Systems Inc.",
       phone: "222-444-5555",
-      salesperson: "Olivia Lee",
+      productList: [],
+      note: "<p>Swift Systems Inc. note</p>",
     },
-    // You can continue adding more company objects here...
   ];
-  
 
   // Step 1: Initialize state variables
   const [searchQuery, setSearchQuery] = useState("");
@@ -105,7 +103,7 @@ const Companies = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
         {filteredCompanies.map((company) => (
-         <CompanyCard key={company.id} company={company}/>
+          <CompanyCard key={company.phone} company={company} />
         ))}
       </div>
     </div>
