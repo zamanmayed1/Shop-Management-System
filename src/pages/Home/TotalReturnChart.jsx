@@ -40,7 +40,7 @@ const TotalReturnChart = () => {
 
   return (
     <div className="w-full h-full border m-2 p-2 rounded-md">
-      <div id="return" style={{ width: '100%', height: '250px' }}></div>
+      <div id="return" style={{ width: '100%', height: '250px' }} className="flex justify-center"></div>
       <h1 className="text-lg font-bold text-center">Total return in the Month</h1>
     </div>
   );

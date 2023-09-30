@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Editor } from "@tinymce/tinymce-react"; // Import TinyMCE Editor
-import { useLocation, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
+import { useGetProductsQuery } from "../../redux/features/api/apiSlice";
 
 const EditProduct = () => {
   let { id } = useParams();
   const { register, handleSubmit, reset, watch, setValue } = useForm();
+  const { data: products } = useGetProductsQuery();
+  let currentProduct = products?.find((p) => p.id == id);
+  let { name:currentName,note:currentNote,sold,buyPrice,salePrice,stock,slug,returnedCount,category } = currentProduct;
 
   const handleEditProduct = (data) => {
-    console.log("New product added:", data);
-    // You can add your logic here to process the form data
-    // For example, sending it to the server
+    console.log("Updated:", data);
+ 
   };
 
   const onSubmit = (formData) => {
@@ -29,7 +32,7 @@ const EditProduct = () => {
     }
   }, [name]);
 
-  const [note, setNote] = useState("");
+  const [note, setNote] = useState(currentNote || "");
 
   const handleNoteChange = (content) => {
     setNote(content);
@@ -40,7 +43,7 @@ const EditProduct = () => {
       <div className="mb-4 bg-blue-50/40 p-2 rounded-md">
         <h1 className="text-2xl font-semibold">
           Edit Product :{" "}
-          <span className="text-blue-500">Product Name Here</span>
+          <span className="text-blue-500">{currentName}</span>
         </h1>
         <h1 className="text-xl font-semibold">
           Product ID : <span className="text-blue-500">{id}</span>
@@ -53,6 +56,7 @@ const EditProduct = () => {
         <input
           type="text"
           id="name"
+          defaultValue={currentName}
           name="name"
           {...register("name")}
           className="border rounded p-2 w-full"
@@ -64,6 +68,7 @@ const EditProduct = () => {
         </label>
         <input
           type="text"
+          defaultValue={slug}
           id="slug"
           name="slug"
           {...register("slug")}
@@ -77,6 +82,7 @@ const EditProduct = () => {
         <input
           type="number"
           id="buyPrice"
+          defaultValue={buyPrice}
           name="buyPrice"
           {...register("buyPrice")}
           className="border rounded p-2 w-full"
@@ -89,6 +95,7 @@ const EditProduct = () => {
         <input
           type="number"
           id="salePrice"
+          defaultValue={salePrice}
           name="salePrice"
           {...register("salePrice")}
           className="border rounded p-2 w-full"
@@ -110,6 +117,7 @@ const EditProduct = () => {
         </label>
         <input
           type="number"
+          defaultValue={stock}
           id="stock"
           name="stock"
           {...register("stock")}
@@ -122,6 +130,7 @@ const EditProduct = () => {
         </label>
         <input
           type="number"
+          defaultValue={sold}
           id="sold"
           name="sold"
           {...register("sold")}
@@ -135,6 +144,7 @@ const EditProduct = () => {
         <input
           type="number"
           id="returnedCount"
+          defaultValue={returnedCount}
           name="returnedCount"
           {...register("returnedCount")}
           className="border rounded p-2 w-full"
@@ -147,6 +157,7 @@ const EditProduct = () => {
         <input
           type="text"
           id="category"
+        defaultValue={category}
           name="category"
           {...register("category")}
           className="border rounded p-2 w-full"

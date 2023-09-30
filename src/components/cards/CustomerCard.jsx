@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 import customerimg from "../../assets/customer.png"
 import ViewCustomerModal from '../modals/ViewCustomerModal';
+import { Link } from 'react-router-dom';
 const CustomerCard = ({customer}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   let {fullName,id,reference,address} = customer
@@ -19,9 +20,9 @@ const CustomerCard = ({customer}) => {
       <button onClick={() => setIsModalOpen(true)} className="flex items-center text-blue-600 hover:text-blue-800">
         <FaEye className="mr-1" /> View
       </button>
-      <button className="flex items-center text-green-600 hover:text-green-800">
+      <Link to={`edit/${customer.id}`} className="flex items-center text-green-600 hover:text-green-800">
         <FaEdit className="mr-1" /> Edit
-      </button>
+      </Link>
       <button className="flex items-center text-red-600 hover:text-red-800">
         <FaTrash className="mr-1" /> Delete
       </button>

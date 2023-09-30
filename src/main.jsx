@@ -24,6 +24,7 @@ import EditProduct from "./pages/editeItems/EditProduct";
 import EditCategory from "./pages/editeItems/EditCategory";
 import EditCustomer from "./pages/editeItems/EditCustomer";
 import EditCompany from "./pages/editeItems/EditCompany";
+import Report from "./pages/Report";
 
 
 const router = createBrowserRouter([
@@ -87,6 +88,10 @@ const router = createBrowserRouter([
         {
           path: "/invoice",
           element: <Invoice/>,
+        },
+        {
+          path: "/report",
+          element: <Report/>,
         },
         {
           path: "/settings",

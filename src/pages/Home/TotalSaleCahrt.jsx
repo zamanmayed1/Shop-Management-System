@@ -36,7 +36,7 @@ const TotalSaleChart = () => {
 
   return (
     <div className="w-full h-full border m-2 p-2 rounded-md">
-      <div id="main" style={{ width: '100%', height: '250px' }}></div>
+      <div id="main" className="flex justify-center" style={{ width: '100%', height: '250px' }}></div>
       <h1 className="text-lg font-bold text-center">Total Sale in Today</h1>
     </div>
   );

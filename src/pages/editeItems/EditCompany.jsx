@@ -1,15 +1,24 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Editor } from "@tinymce/tinymce-react";
+import { useParams } from "react-router-dom";
+import { useGetCompanyQuery } from "../../redux/features/api/apiSlice";
 
 const EditCompany = () => {
+  let { id } = useParams();
+  const { data:company } = useGetCompanyQuery();
+
+  let currentCompany= company?.find((c) => c.id == id);
+  let {companyName:currentName, note:currentNote,phone ,productList} = currentCompany 
+
   const { register, handleSubmit, reset } = useForm();
-  const [products, setProducts] = useState([]); // State to manage the product list
+  const [products, setProducts] = useState(productList || []); // State to manage the product list
   const [productName, setProductName] = useState(""); // State to capture product name
+
 
   const handleEditCompany = (data) => {
     data.note = note; // Include the "Note" content in the form data
-    console.log("New company added:", data);
+    console.log("Updated:", data);
     // You can add your logic here to process the form data
     // For example, sending it to the server
   };
@@ -35,7 +44,7 @@ const EditCompany = () => {
     setProducts(updatedProducts);
   };
 
-  const [note, setNote] = useState("");
+  const [note, setNote] = useState(currentNote || "");
 
   const handleNoteChange = (content) => {
     setNote(content);
@@ -44,7 +53,7 @@ const EditCompany = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-4 p-4 ">
       <div className="mb-4 bg-blue-50/40 p-2 rounded-md">
-        <h1 className="text-2xl font-semibold">Add New Company</h1>
+        <h1 className="text-2xl font-semibold">Edit Company :  <span className="text-blue-500">{currentName}</span></h1>
       </div>
       <div className="mb-4">
         <label htmlFor="companyName" className="block text-gray-700">
@@ -54,6 +63,7 @@ const EditCompany = () => {
           type="text"
           id="companyName"
           name="companyName"
+          defaultValue={currentName}
           {...register("companyName")}
           className="border rounded p-2 w-full"
         />
@@ -66,6 +76,7 @@ const EditCompany = () => {
           type="tel"
           id="phone"
           name="phone"
+          defaultValue={phone}
           {...register("phone")}
           className="border rounded p-2 w-full"
         />

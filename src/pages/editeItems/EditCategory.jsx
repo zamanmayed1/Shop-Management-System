@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Editor } from "@tinymce/tinymce-react";
+import { useGetCategoryQuery } from "../../redux/features/api/apiSlice";
+import { useParams } from "react-router-dom";
 
 const EditCategory = () => {
+  let { id } = useParams();
   const { register, handleSubmit, reset, watch, setValue } = useForm();
+  const { data:category } = useGetCategoryQuery();
 
+  let currentCategory= category?.find((c) => c.id == id);
+  let {name:currentName,slug,totalPrice,totalProduct,note:currentNote } = currentCategory 
+
+  
   const handleEditCategory = (data) => {
-    console.log("New category added:", data);
+    console.log("Updated:", data);
     // You can add your logic here to process the form data
     // For example, sending it to the server
   };
@@ -15,7 +23,7 @@ const EditCategory = () => {
     // Include the content of the TinyMCE editor in the form data
     formData.note = note;
     handleEditCategory(formData);
-    reset();
+
   };
 
   const name = watch("name");
@@ -27,7 +35,7 @@ const EditCategory = () => {
     }
   }, [name]);
 
-  const [note, setNote] = useState("");
+  const [note, setNote] = useState(currentNote || "");
 
   const handleNoteChange = (content) => {
     setNote(content);
@@ -36,7 +44,7 @@ const EditCategory = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-4 p-4 ">
       <div className="mb-4 bg-blue-50/40 p-2 rounded-md">
-        <h1 className="text-2xl font-semibold">Add New Category</h1>
+        <h1 className="text-2xl font-semibold">Edit Category : <span className="text-blue-500">{currentName}</span></h1>
       </div>
       <div className="mb-4">
         <label htmlFor="name" className="block text-gray-700">
@@ -46,6 +54,7 @@ const EditCategory = () => {
           type="text"
           id="name"
           name="name"
+         defaultValue={currentName}
           {...register("name")}
           className="border rounded p-2 w-full"
         />
@@ -58,6 +67,7 @@ const EditCategory = () => {
           type="text"
           id="slug"
           name="slug"
+         defaultValue={slug}
           {...register("slug")}
           className="border rounded p-2 w-full"
         />
@@ -70,6 +80,7 @@ const EditCategory = () => {
           type="number"
           id="totalProduct"
           name="totalProduct"
+         defaultValue={totalProduct}
           {...register("totalProduct")}
           className="border rounded p-2 w-full"
         />
@@ -83,6 +94,7 @@ const EditCategory = () => {
           type="number"
           id="totalPrice"
           name="totalPrice"
+         defaultValue={totalPrice}
           {...register("totalPrice")}
           className="border rounded p-2 w-full"
         />
@@ -92,6 +104,7 @@ const EditCategory = () => {
           Note
         </label>
         <Editor
+        
           apiKey="geqdf9cawks4y0x46ogrzwqb4cowpuwnm3nbna23sso69qpt"
           value={note}
           onEditorChange={handleNoteChange}

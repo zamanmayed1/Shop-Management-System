@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { RiSettings3Fill, RiHome2Fill, RiProfileFill, RiFolderFill, RiUserFill, RiBuilding2Fill, RiInbox2Fill } from 'react-icons/ri'; // Import icons
+import { RiSettings3Fill,RiArticleFill, RiHome2Fill, RiProfileFill, RiFolderFill, RiUserFill, RiBuilding2Fill, RiInbox2Fill } from 'react-icons/ri'; // Import icons
 import {TbPlus} from 'react-icons/tb'
 import Header from './Header';
 import { useSelector } from 'react-redux';
@@ -34,6 +34,9 @@ const Root = () => {
           </NavLink>
           <NavLink to="/invoice" currentPath={pathname}>
             <RiInbox2Fill /> Invoice
+          </NavLink>
+          <NavLink to="/report" currentPath={pathname}>
+            <RiArticleFill /> Reports
           </NavLink>
           <NavLink to="/settings" currentPath={pathname}>
             <RiSettings3Fill /> Settings
