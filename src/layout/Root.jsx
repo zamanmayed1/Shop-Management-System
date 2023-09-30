@@ -3,15 +3,17 @@ import { Link, Outlet, useLocation } from 'react-router-dom';
 import { RiSettings3Fill, RiHome2Fill, RiProfileFill, RiFolderFill, RiUserFill, RiBuilding2Fill, RiInbox2Fill } from 'react-icons/ri'; // Import icons
 import {TbPlus} from 'react-icons/tb'
 import Header from './Header';
+import { useSelector } from 'react-redux';
 
 const Root = () => {
   const location = useLocation();
+  const themeColor = useSelector((state) => state.settings.theme);
   let { pathname } = location;
   useEffect(()=>{
        window.scrollTo(0,0)
   },[pathname])
   return (
-    <div className="bg-gray-100 min-h-screen p-2">
+    <div  style={{backgroundColor :themeColor }} className="min-h-screen p-2">
       <Header />
       <div className="grid grid-cols-5 gap-2 h-screen p-2">
         <div className="col-span-1 bg-white m-3 shadow-md rounded-md p-2 h-full">

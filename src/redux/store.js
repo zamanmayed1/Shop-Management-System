@@ -5,9 +5,11 @@ import {
   customersApi,
   companyApi,
 } from "./features/api/apiSlice";
+import settignsSlice from "./features/settignsSlice";
 
 export const store = configureStore({
   reducer: {
+    settings: settignsSlice,
     [productsApi.reducerPath]: productsApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
     [customersApi.reducerPath]: customersApi.reducer,

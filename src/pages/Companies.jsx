@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 import CompanyCard from "../components/cards/CompanyCard";
-import axios from "axios"; // Import Axios for data fetching
-import Spinner from "../components/Spinner";
 import { useGetCompanyQuery } from "../redux/features/api/apiSlice";
+import Spinner from "../components/Spinner";
 
 const Companies = () => {
   const {data,isLoading,isSuccess} = useGetCompanyQuery()

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import CustomerCard from "../components/cards/CustomerCard";
-import axios from "axios";
 import Spinner from "../components/Spinner";
 import { useGetCustomersQuery } from "../redux/features/api/apiSlice";
 

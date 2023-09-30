@@ -1,19 +1,15 @@
 import React from "react";
-import { companyName } from "../pages/Settings";
-import { effect } from "@preact/signals-react";
+import {  useSelector } from "react-redux";
 const Header = () => {
-  
-    let name = localStorage.getItem("comName") || "Company Name"
-
+  const companyName = useSelector((state) => state.settings.companyName)
   const currentDate = new Date();
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   const formattedDate = currentDate.toLocaleDateString('en-US', options);
-
   return (
     <header className="bg-white py-2 px-4 md:px-8 shadow-sm rounded-md">
       <div className="md:flex justify-between items-center">
         <div className="my-2">
-          <h1 className="text-xl text-center font-semibold text-gray-800">{name}</h1>
+          <h1 className="text-xl text-center font-semibold text-gray-800">{companyName}</h1>
         </div>
 
         <div className="lg:text-right text-center text-gray-600 my-2">
