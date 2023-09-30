@@ -3,36 +3,21 @@ import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 import CompanyCard from "../components/cards/CompanyCard";
 import axios from "axios"; // Import Axios for data fetching
 import Spinner from "../components/Spinner";
+import { useGetCompanyQuery } from "../redux/features/api/apiSlice";
 
 const Companies = () => {
+  const {data,isLoading,isSuccess} = useGetCompanyQuery()
   const [searchQuery, setSearchQuery] = useState("");
-  const [companiesData, setCompaniesData] = useState([]);
   const [filteredCompanies, setFilteredCompanies] = useState([]);
-  const [loading, setLoading] = useState(true); // Add a loading state
 
+  
   useEffect(() => {
-    // Step 1: Fetch data using Axios when the component mounts
-    axios
-      .get("https://api.npoint.io/34806c66b4cb7087d92b")
-      .then(function (response) {
-        setCompaniesData(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-      .finally(function () {
-        setLoading(false); // Set loading to false when data is fetched
-      });
-  }, []);
-
-  useEffect(() => {
-    // Step 2: Use the filter method to filter companies when companiesData or searchQuery changes
     const query = searchQuery.toLowerCase();
-    const filtered = companiesData.filter((company) =>
+    const filtered = data?.filter((company) =>
       company.companyName.toLowerCase().includes(query)
     );
     setFilteredCompanies(filtered);
-  }, [companiesData, searchQuery]);
+  }, [data, searchQuery]);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e?.target?.value.toLowerCase());
@@ -44,7 +29,7 @@ const Companies = () => {
         <h1 className="text-2xl font-semibold">Company List</h1>
         <div className="flex justify-between mt-2">
           <p className="text-gray-600">
-            Total Companies: {filteredCompanies.length}
+            Total Companies: {filteredCompanies?.length}
           </p>
           <input
             type="text"
@@ -56,11 +41,11 @@ const Companies = () => {
         </div>
       </div>
 
-      {loading ? ( // Step 3: Render the spinner when loading is true
+      {isLoading ? ( // Step 3: Render the spinner when loading is true
         <Spinner />
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-          {filteredCompanies.map((company) => (
+          {filteredCompanies?.map((company) => (
             <CompanyCard key={company.phone} company={company} />
           ))}
         </div>

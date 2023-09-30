@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { RiSettings3Fill, RiHome2Fill, RiProfileFill, RiFolderFill, RiUserFill, RiBuilding2Fill, RiInbox2Fill } from 'react-icons/ri'; // Import icons
+import {TbPlus} from 'react-icons/tb'
 import Header from './Header';
 
 const Root = () => {
@@ -75,7 +76,7 @@ const NavLink = ({ to, currentPath, children }) => {
           className='absolute text-3xl right-2 top-[6px] bg-white hover:text-blue-500 text-black w-10 h-10 rounded-full border text-center flex justify-center items-center'
           to={addRoute}
         >
-          +
+          <TbPlus className='text-xl'/>
         </Link>
       )}
     </div>

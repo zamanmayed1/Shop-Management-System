@@ -12,31 +12,31 @@ const Home = () => {
           {/* Total Product */}
           <div className="bg-white shadow-sm border hover:scale-105 duration-300 rounded-lg p-4 ">
             <h2 className="text-lg font-semibold mb-2">Total Product</h2>
-            <p className="text-2xl font-bold">1000</p>
+            <p className="text-2xl font-bold text-blue-500">1000</p>
           </div>
 
           {/* Total Category */}
           <div className="bg-white shadow-sm border hover:scale-105 duration-300 rounded-lg p-4">
             <h2 className="text-lg font-semibold mb-2">Total Category</h2>
-            <p className="text-2xl font-bold">08</p>
+            <p className="text-2xl font-bold text-blue-500">08</p>
           </div>
 
           {/* Total Sale */}
           <div className="bg-white shadow-sm border hover:scale-105 duration-300 rounded-lg p-4">
             <h2 className="text-lg font-semibold mb-2">Total Sale</h2>
-            <p className="text-2xl font-bold">$10,000</p>
+            <p className="text-2xl font-bold text-blue-500">$10,000</p>
           </div>
 
           {/* Total Customer */}
           <div className="bg-white shadow-sm border hover:scale-105 duration-300 rounded-lg p-4">
             <h2 className="text-lg font-semibold mb-2">Total Customer</h2>
-            <p className="text-2xl font-bold">78</p>
+            <p className="text-2xl font-bold text-blue-500">78</p>
           </div>
 
           {/* Total Return */}
           <div className="bg-white shadow-sm border hover:scale-105 duration-300 rounded-lg p-4">
             <h2 className="text-lg font-semibold mb-2">Total Return</h2>
-            <p className="text-2xl font-bold">23</p>
+            <p className="text-2xl font-bold text-blue-500">23</p>
           </div>
         </div>
       </div>

@@ -1,35 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import CategoryCard from '../components/cards/CategoryCard';
-import axios from 'axios';
 import Spinner from '../components/Spinner';
+import { useGetCategoryQuery } from '../redux/features/api/apiSlice';
 
 const Categories = () => {
-  const [categoriesData, setCategoriesData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredCategories, setFilteredCategories] = useState([]);
-  const [loading, setLoading] = useState(true); // Add a loading state
+const {isLoading, data,isSuccess} = useGetCategoryQuery()
+
 
   useEffect(() => {
-    axios
-      .get("https://api.npoint.io/6a1401b2360dc393c8df")
-      .then(function (response) {
-        setCategoriesData(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-      .finally(function () {
-        setLoading(false); // Set loading to false when data is fetched
-      });
-  }, []);
-
-  useEffect(() => {
-    // Use the filter method to filter categories when categoriesData changes
-    const filtered = categoriesData.filter((category) =>
+    // Use the filter method to filter categories when data changes
+    const filtered = data?.filter((category) =>
       category.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredCategories(filtered);
-  }, [categoriesData, searchQuery]);
+  }, [data, searchQuery]);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value.toLowerCase());
@@ -41,7 +27,7 @@ const Categories = () => {
         <h1 className="text-2xl font-semibold">All Categories</h1>
         <div className="flex justify-between mt-2">
           <p className="text-gray-600">
-            Total Categories: {filteredCategories.length}
+            Total Categories: {filteredCategories?.length}
           </p>
           {/* Step 4: Use the searchQuery state */}
           <input
@@ -54,11 +40,11 @@ const Categories = () => {
         </div>
       </div>
 
-      {loading ? ( // Render the spinner when loading is true
+      {isLoading ? ( // Render the spinner when loading is true
         <Spinner />
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-          {filteredCategories.map((category) => (
+          {filteredCategories?.map((category) => (
             <CategoryCard key={category.slug} category={category} />
           ))}
         </div>

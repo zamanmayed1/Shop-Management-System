@@ -2,35 +2,23 @@ import React, { useState, useEffect } from "react";
 import CustomerCard from "../components/cards/CustomerCard";
 import axios from "axios";
 import Spinner from "../components/Spinner";
+import { useGetCustomersQuery } from "../redux/features/api/apiSlice";
 
 const Customers = () => {
+const {data , isLoading, isSuccess} = useGetCustomersQuery()
   const [searchQuery, setSearchQuery] = useState("");
-  const [customersData, setCustomersData] = useState([]);
   const [filteredCustomers, setFilteredCustomers] = useState([]);
-  const [loading, setLoading] = useState(true); // Add a loading state
+
+  
 
   useEffect(() => {
-    axios
-      .get("https://api.npoint.io/a449b9882e53c0bf0a32")
-      .then(function (response) {
-        setCustomersData(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-      .finally(function () {
-        setLoading(false); // Set loading to false when data is fetched
-      });
-  }, []);
-
-  useEffect(() => {
-    // Use the filter method to filter customers when customersData or searchQuery changes
+    // Use the filter method to filter customers when data or searchQuery changes
     const query = searchQuery.toLowerCase();
-    const filtered = customersData.filter((customer) =>
+    const filtered = data?.filter((customer) =>
       customer.fullName.toLowerCase().includes(query)
     );
     setFilteredCustomers(filtered);
-  }, [customersData, searchQuery]);
+  }, [data, searchQuery]);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value.toLowerCase());
@@ -42,7 +30,7 @@ const Customers = () => {
         <h1 className="text-2xl font-semibold">Customer List</h1>
         <div className="flex justify-between mt-2">
           <p className="text-gray-600">
-            Total Customers: {filteredCustomers.length}
+            Total Customers: {filteredCustomers?.length}
           </p>
           <input
             type="text"
@@ -54,11 +42,11 @@ const Customers = () => {
         </div>
       </div>
 
-      {loading ? ( // Render the spinner when loading is true
+      {isLoading ? ( // Render the spinner when loading is true
         <Spinner />
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-          {filteredCustomers.map((customer) => (
+          {filteredCustomers?.map((customer) => (
             <CustomerCard key={customer.phoneNumber} customer={customer} />
           ))}
         </div>

@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 import productimg from "../../assets/product.png"
 import ViewProductsModal from "../modals/ViewProductsModal";
+import { Link, useParams } from "react-router-dom";
 const ProductCard = ({product}) => {
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -28,9 +30,9 @@ const ProductCard = ({product}) => {
         <button onClick={() => setIsModalOpen(true)} className="flex items-center text-blue-600 hover:text-blue-800">
           <FaEye  className="mr-1" /> View
         </button>
-        <button className="flex items-center text-green-600 hover:text-green-800">
+        <Link to={`edit/${product.id}`} className="flex items-center text-green-600 hover:text-green-800">
           <FaEdit className="mr-1" /> Edit
-        </button>
+        </Link>
         <button className="flex items-center text-red-600 hover:text-red-800">
           <FaTrash className="mr-1" /> Delete
         </button>

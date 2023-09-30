@@ -69,3 +69,9 @@ body::-webkit-scrollbar {
         opacity: 0;
       }
     }
+
+
+.tox-statusbar__branding  {
+  display: none;
+
+    }
