@@ -25,7 +25,7 @@ The intricacies of running a shop encompass a myriad of responsibilities, spanni
 
 
 Embark on a visual journey through the Shop Management System with these illustrative snapshots:
-
+![Screenshot 1](https://i.ibb.co/pZjtXz9/pika-1696132662134-1x.png)
 ![Screenshot 1](https://i.ibb.co/dMWkZwX/pika-1695868258195-1x.png)
 ![Screenshot 1](https://i.ibb.co/jbrtMG5/pika-1695868295195-1x.png)
 ![Screenshot 1](https://i.ibb.co/FgZ8kQj/pika-1695868328240-1x.png)
